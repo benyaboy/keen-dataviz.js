@@ -45043,16 +45043,9 @@ exports.default = function (startDate, endDate) {
         // decide closest point and return
         return $$.findClosest(candidates, pos);
     };
-    ChartInternal.prototype.horizontalDistance = function(data, pos) {
-    var $$ = this,
-        config = $$.config,
-        xIndex = config.axis_rotated ? 1 : 0,
-        x = $$.x(data.x);
-         return Math.abs(x - pos[xIndex]);
-};
     ChartInternal.prototype.findClosest = function (values, pos) {
         var $$ = this,
-            minDist = Infinity,
+            minDist = $$.config.point_sensitivity,
             closest;
 
         // find mouseovering bar
@@ -45069,7 +45062,7 @@ exports.default = function (startDate, endDate) {
         values.filter(function (v) {
             return v && !$$.isBarType(v.id);
         }).forEach(function (v) {
-            var d = $$.horizontalDistance(v, pos);
+            var d = $$.dist(v, pos);
             if (d < minDist) {
                 minDist = d;
                 closest = v;
