@@ -18331,8 +18331,6 @@ function _generateTableHeader(datavizInstance, dataset) {
 }
 
 var render = function render() {
-  var _this = this;
-
   var dataset = this.dataset.matrix;
 
   var el = this.el();
@@ -18403,9 +18401,9 @@ var render = function render() {
       }
       event.target.setAttribute('order', sortOrder);
 
-      var first = _this.dataset.matrix.shift();
-      _this.dataset.matrix.sort(checker);
-      _this.dataset.matrix.unshift(first);
+      var first = this.dataset.matrix.shift();
+      this.dataset.matrix.sort(checker);
+      this.dataset.matrix.unshift(first);
 
       el.querySelector('.' + theme + '-rendering tbody').innerHTML = _generateTableRows(datavizInstance, dataset);
       attachBtnEventListeners();
